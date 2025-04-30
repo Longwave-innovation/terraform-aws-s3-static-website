@@ -1,0 +1,77 @@
+name: Generate terraform docs
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+    - '**.tf'
+    - '**.tfvars'
+    - '**.hcl'
+    - '.terraform.lock.hcl'
+jobs:
+
+  tf-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Git identity
+      run: |
+        git config --global user.email "innovation_r&d@lantechlongwave.it"
+        git config --global user.name "ActionBot"
+
+    - name: Install terraform-docs
+      run: |
+        cd ..
+        curl -Lo terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.17.0/terraform-docs-v0.17.0-linux-amd64.tar.gz
+        tar -xzf terraform-docs.tar.gz
+        sudo mv terraform-docs /usr/local/bin/
+
+    - name: Render terraform docs inside the README.md and push changes back to PR branch
+      run: |
+        terraform-docs markdown table .
+        git add '*README.md'
+        if ! git diff-index --quiet HEAD; then
+          git commit -m "[skip ci] terraform-docs: Update DOCUMENTATION"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
+        fi
+
+  lint-markdown:
+    needs: [ tf-docs ]
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "The job was automatically triggered by a ${{ github.event_name }} event made by ${{ github.actor }}."
+    - run: echo "This job is now running on a ${{ runner.os }} server hosted by Gitea!"
+    - run: echo "The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+    - name: Installing markdownlint and test
+
+      run: |
+        npm install -g markdownlint-cli
+        markdownlint --version
+
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
+
+    - name: Moving the script into the git folder
+      run: cd ${{ github.workspace }}
+
+    - name: Checking markdown linting errors
+      id: markdown_linting
+      # Preventing the command to exit as soon as there's an exit code != 0 with `set +e`
+      # Save the exit code of the command and use it with the comamnd `exit`` at the end of step
+      run: |
+        markdownlint '**/*.md' --ignore node_modules -o linting_errors.html
+
+    - name: See content of linting_errors.html
+      if: ${{ failure() }}
+      run: |
+        cat linting_errors.html
+
+    - run: echo "This job's status is ${{ job.status }}."

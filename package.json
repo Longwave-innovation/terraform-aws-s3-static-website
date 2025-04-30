@@ -1,0 +1,16 @@
+{
+  "name": "terraform-aws-module",
+  "version": "0.3.6",
+  "description": "Repository template for a terraform module.",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "tf-validate": "cd ./terraform && terraform validate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.lantechlongwave.it/RnD/terraform-aws-module-template.git"
+  },
+  "author": "Mirco Bozzolini"
+}
