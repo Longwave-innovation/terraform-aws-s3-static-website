@@ -1,6 +1,6 @@
 {
   "name": "terraform-aws-module",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Repository template for a terraform module.",
   "directories": {
     "doc": "docs"
