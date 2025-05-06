@@ -37,7 +37,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | Name of the bucket | `string` | n/a | yes |
-| <a name="input_cors_rules"></a> [cors\_rules](#input\_cors\_rules) | Variable to define CORS rules. See [documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_cors_configuration#cors_rule). | <pre>list(object({<br>    allowed_headers = list(string),<br>    allowed_methods = list(string),<br>    allowed_origins = list(string),<br>    expose_headers  = list(string),<br>    max_age_seconds = number <br>  }))</pre> | <pre>[<br>  {<br>    "allowed_headers": [<br>      "*"<br>    ],<br>    "allowed_methods": [<br>      "GET"<br>    ],<br>    "allowed_origins": [<br>      "*"<br>    ],<br>    "expose_headers": [],<br>    "max_age_seconds": 300<br>  }<br>]</pre> | no |
+| <a name="input_cors_rules"></a> [cors\_rules](#input\_cors\_rules) | Variable to define CORS rules. See [documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_cors_configuration#cors_rule). | <pre>list(object({<br>    allowed_headers = list(string),<br>    allowed_methods = list(string),<br>    allowed_origins = list(string),<br>    expose_headers  = list(string),<br>    max_age_seconds = number<br>  }))</pre> | <pre>[<br>  {<br>    "allowed_headers": [<br>      "*"<br>    ],<br>    "allowed_methods": [<br>      "GET"<br>    ],<br>    "allowed_origins": [<br>      "*"<br>    ],<br>    "expose_headers": [],<br>    "max_age_seconds": 300<br>  }<br>]</pre> | no |
 | <a name="input_directory_to_upload"></a> [directory\_to\_upload](#input\_directory\_to\_upload) | The directory to upload to the bucket | `string` | `"./site"` | no |
 | <a name="input_error_file"></a> [error\_file](#input\_error\_file) | The page loaded when an error occurs | `string` | `"error.html"` | no |
 | <a name="input_extra_content_type_map"></a> [extra\_content\_type\_map](#input\_extra\_content\_type\_map) | You can define extra extension mapping for their content type, this map will override current defaults. | `map(string)` | `{}` | no |
@@ -51,7 +51,6 @@ No modules.
 |------|-------------|
 | <a name="output_bucket_arn"></a> [bucket\_arn](#output\_bucket\_arn) | The ARN of the bucket |
 | <a name="output_bucket_id"></a> [bucket\_id](#output\_bucket\_id) | The ID of the bucket, that is the name |
-| <a name="output_files_to_upload"></a> [files\_to\_upload](#output\_files\_to\_upload) | List of files to upload |
 | <a name="output_website_domain"></a> [website\_domain](#output\_website\_domain) | The domain of the website endpoint |
 | <a name="output_website_endpoint"></a> [website\_endpoint](#output\_website\_endpoint) | The endpoint URL of the bucket |
 <!-- END_TF_DOCS -->
