@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [terraform-aws-s3-static-website <!-- omit in toc -->](#terraform-aws-s3-static-website----omit-in-toc---)
+  - [Requirements](#requirements)
+  - [Providers](#providers)
+  - [Modules](#modules)
+  - [Resources](#resources)
+  - [Inputs](#inputs)
+  - [Outputs](#outputs)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # terraform-aws-s3-static-website <!-- omit in toc -->
 
 This modile creates a public S3 bucket and upload a website to it in order to host it.
