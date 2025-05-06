@@ -52,3 +52,9 @@ variable "directory_to_upload" {
   description = "The directory to upload to the bucket"
   default     = "./site"
 }
+
+variable "extra_content_type_map" {
+  type = map(string)
+  default = {}
+  description = "You can define extra extension mapping for their content type, this map will override current defaults."
+}

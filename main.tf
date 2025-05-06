@@ -1,7 +1,7 @@
 locals {
   bucket_id  = var.use_existing_bucket ? data.aws_s3_bucket.existing[0].id : aws_s3_bucket.new[0].id
   bucket_arn = var.use_existing_bucket ? data.aws_s3_bucket.existing[0].arn : aws_s3_bucket.new[0].arn
-  content_type_map = {
+  content_type_map_defaults = {
     "html"  = "text/html"
     "css"   = "text/css"
     "js"    = "application/javascript"
@@ -21,7 +21,9 @@ locals {
     "ttf"   = "font/ttf"
     "eot"   = "application/vnd.ms-fontobject"
     "otf"   = "font/otf"
+    "gz" = "application/x-gzip"
   }
+  content_type_map = merge(local.content_type_map_defaults, var.extra_content_type_map)
 }
 
 resource "aws_s3_bucket" "new" {
