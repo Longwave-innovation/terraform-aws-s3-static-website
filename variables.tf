@@ -33,7 +33,7 @@ variable "cors_rules" {
     allowed_methods = list(string),
     allowed_origins = list(string),
     expose_headers  = list(string),
-    max_age_seconds = number 
+    max_age_seconds = number
   }))
   default = [
     {
@@ -54,7 +54,7 @@ variable "directory_to_upload" {
 }
 
 variable "extra_content_type_map" {
-  type = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
   description = "You can define extra extension mapping for their content type, this map will override current defaults."
 }

@@ -21,7 +21,7 @@ locals {
     "ttf"   = "font/ttf"
     "eot"   = "application/vnd.ms-fontobject"
     "otf"   = "font/otf"
-    "gz" = "application/x-gzip"
+    "gz"    = "application/x-gzip"
   }
   content_type_map = merge(local.content_type_map_defaults, var.extra_content_type_map)
 }
@@ -93,11 +93,11 @@ resource "aws_s3_bucket_cors_configuration" "rules" {
 }
 
 resource "aws_s3_object" "upload" {
-  for_each = fileset(var.directory_to_upload, "**")
-  bucket   = local.bucket_id
-  key      = each.value
-  source   = "${var.directory_to_upload}/${each.value}"
-  etag     = filemd5("${var.directory_to_upload}/${each.value}")
+  for_each               = fileset(var.directory_to_upload, "**")
+  bucket                 = local.bucket_id
+  key                    = each.value
+  source                 = "${var.directory_to_upload}/${each.value}"
+  etag                   = filemd5("${var.directory_to_upload}/${each.value}")
   server_side_encryption = null
   # Determine content type based on file extension
   content_type = lookup(
@@ -105,16 +105,4 @@ resource "aws_s3_object" "upload" {
     length(regexall("\\.([^.]+)$", each.value)) > 0 ? lower(replace(regexall("\\.([^.]+)$", each.value)[0][0], ".*\\.", "")) : "",
     "application/octet-stream"
   )
-}
-
-output "files_to_upload" {
-  value = { for file in fileset(var.directory_to_upload, "**") : file => {
-    type: lookup(
-      local.content_type_map,
-      length(regexall("\\.([^.]+)$", file)) > 0 ? lower(replace(regexall("\\.([^.]+)$", file)[0][0], ".*\\.", "")) : "",
-      "application/octet-stream"
-    ),
-    ext: regexall("\\.([^.]+)$", file)
-  }}
-  description = "List of files to upload"
 }

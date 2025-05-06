@@ -17,7 +17,3 @@ output "website_endpoint" {
   value       = module.s3_static_website.website_endpoint
   description = "Endpoint of the S3 bucket"
 }
-
-output "file_uploaded" {
-  value = module.s3_static_website.files_to_upload
-}
