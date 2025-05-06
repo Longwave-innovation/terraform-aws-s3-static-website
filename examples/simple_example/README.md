@@ -15,7 +15,9 @@
 
 ## Intro
 
-This example shows the creation of a pipeline of `type V1`, that listen to every change on the branch `main`.
+This example show how to create a static S3 website uploading a sample HTML website.
+
+[Source code for the sample HTML website](https://github.com/cloudacademy/static-website-example)
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
