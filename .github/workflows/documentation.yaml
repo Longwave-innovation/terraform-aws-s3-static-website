@@ -4,9 +4,11 @@ on:
     branches: [ main ]
     paths:
     - '**.tf'
-    - '**.tfvars'
     - '**.hcl'
     - '.terraform.lock.hcl'
+    - '**.md'
+    - '.github/workflows/documentation.yaml'
+
 jobs:
 
   tf-docs:
@@ -25,21 +27,26 @@ jobs:
         git config --global user.email "innovation_r&d@lantechlongwave.it"
         git config --global user.name "ActionBot"
 
-    - name: Install terraform-docs
-      run: |
-        cd ..
-        curl -Lo terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.17.0/terraform-docs-v0.17.0-linux-amd64.tar.gz
-        tar -xzf terraform-docs.tar.gz
-        sudo mv terraform-docs /usr/local/bin/
-
     - name: Render terraform docs inside the README.md and push changes back to PR branch
-      run: |
-        terraform-docs markdown table .
-        git add '*README.md'
-        if ! git diff-index --quiet HEAD; then
-          git commit -m "[skip ci] terraform-docs: Update DOCUMENTATION"
-          git push origin HEAD:${{ github.event.pull_request.head.ref }}
-        fi
+      uses: terraform-docs/gh-actions@v1.3.0
+      with:
+        working-dir: .
+        config-file: .terraform-docs.yaml
+        git-push: "true"
+        git-commit-message: "docs: terraform-docs automated update"
+
+    - name: Updating Table Of Contents
+      uses: technote-space/toc-generator@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        TOC_TITLE: ''
+        TARGET_PATHS: 'README*.md, **/README*.md'
+
+    - name: Committing changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "[skip ci] terraform-docs: Update DOCUMENTATION and TOC"
+        branch: ${{ github.event.pull_request.head.ref }}
 
   lint-markdown:
     needs: [ tf-docs ]

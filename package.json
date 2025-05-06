@@ -1,7 +1,7 @@
 {
-  "name": "terraform-aws-module",
-  "version": "0.3.7",
-  "description": "Repository template for a terraform module.",
+  "name": "terraform-aws-s3-static-website",
+  "version": "0.0.1",
+  "description": "Terraform module that creates an S3 bucket as a static websites and load a specific directory.",
   "directories": {
     "doc": "docs"
   },
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git.lantechlongwave.it/RnD/terraform-aws-module-template.git"
+    "url": "https://github.com/Longwave-innovation/terraform-aws-s3-static-website.git"
   },
   "author": "Mirco Bozzolini"
 }
