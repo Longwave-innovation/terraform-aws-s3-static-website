@@ -3,6 +3,8 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [Features](#features)
+- [Overview](#overview)
 - [Requirements](#requirements)
 - [Providers](#providers)
 - [Modules](#modules)
@@ -12,7 +14,30 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-This modile creates a public S3 bucket and upload a website to it in order to host it.
+A Terraform module to deploy and configure an S3-based static website hosting solution on AWS. This module simplifies the process of creating and managing static websites hosted on Amazon S3 by handling all the necessary configurations including bucket creation, website configuration, CORS rules, and public access settings.
+
+## Features
+
+- Creates a new S3 bucket or uses an existing one for website hosting
+- Configures S3 static website hosting with customizable index and error documents
+- Sets up proper bucket policies for public access
+- Supports custom CORS configurations
+- Handles file uploads from a local directory to S3
+- Supports custom content type mappings
+- Configurable routing rules for URL redirection
+- Provides website endpoint outputs for easy access
+
+## Overview
+
+This module creates a public S3 bucket configured for static website hosting. It handles all necessary configurations including bucket policies, CORS rules, and file uploads. The module is designed to be flexible, allowing you to either create a new bucket or use an existing one, and customize various aspects of the website configuration including index/error pages, routing rules, and content type mappings.
+
+Perfect for hosting:
+
+- Static websites
+- Single Page Applications (SPAs)
+- Documentation sites
+- Landing pages
+- Static content delivery
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
