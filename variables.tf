@@ -11,13 +11,13 @@ variable "use_existing_bucket" {
 
 variable "index_file" {
   type        = string
-  description = "The first page loaded when the website is loaded"
+  description = "HTML file to use as index for the website."
   default     = "index.html"
 }
 
 variable "error_file" {
   type        = string
-  description = "The page loaded when an error occurs"
+  description = "HTML file to use as error page."
   default     = "error.html"
 }
 
