@@ -1,6 +1,6 @@
 {
   "name": "terraform-aws-s3-static-website",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Terraform module that creates an S3 bucket as a static websites and load a specific directory.",
   "directories": {
     "doc": "docs"
